@@ -411,8 +411,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        <c:url value="" var="url"></c:url>
-                        <form:form method="post" action="${url}" modelAttribute="editBrandObj" enctype="multipart/form-data" class="form-horizontal" role="form">
+                        <c:url value="/admin/brand/editBrand" var="url"></c:url>
+                        <form:form method="post" action="${url}" commandName="editBrandObj" enctype="multipart/form-data" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tên nhà sản xuất: </label>
 

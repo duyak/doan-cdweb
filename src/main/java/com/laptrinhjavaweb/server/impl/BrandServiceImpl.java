@@ -57,7 +57,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void editBrand(Brand brand) {
-        brand.setUpdateDate(new Date());
+        brand.setActiveFlag(1);
+        brand.setStatus(1);
+//        brand.setUpdateDate(new Date());
         brandRepository.editBrand(brand);
 
     }

@@ -116,7 +116,7 @@ public class BrandController {
         return new ModelAndView("editBrand", "editBrandObj", brand);
     }
 
-    @RequestMapping(value = "/admin/brand/editBrand/", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/brand/editBrand", method = RequestMethod.POST)
     public String editBrand(@ModelAttribute(value = "editBrandObj") Brand brand) {
         brandService.editBrand(brand);
         return "redirect:/getAllBrands";

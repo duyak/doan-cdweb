@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: nguye
-  Date: 05/08/2020
-  Time: 11:37 AM
+  Date: 16/08/2020
+  Time: 12:46 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Sửa nhà sản xuất</title>
+    <title>Thêm nhà sản xuất</title>
 
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -411,9 +411,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-
-                        <c:url value="/admin/brand/editBrand/" var="url"></c:url>
-                        <form:form method="post" action="${url}" enctype="multipart/form-data" class="form-horizontal" role="form">
+                        <c:url value="/admin/brand/editBrand" var="url"></c:url>
+                        <form:form method="post" action="${url}" commandName="editBrandObj" enctype="multipart/form-data" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tên nhà sản xuất: </label>
 

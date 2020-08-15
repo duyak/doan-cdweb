@@ -71,7 +71,7 @@ public class BrandRepositoryImpl implements BrandRepository {
     @Override
     public void editBrand(Brand brand) {
         Session session = sessionFactory.openSession();
-        session.update(brand);
+        session.saveOrUpdate(brand);
         session.flush();
         session.close();
 

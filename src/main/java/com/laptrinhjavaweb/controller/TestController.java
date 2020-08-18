@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
     @RequestMapping("/addProduct")
     public String index(){
-        return "addProduct";
+        return "demo";
     }
 
 

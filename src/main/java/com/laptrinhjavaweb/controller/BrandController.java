@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -88,15 +89,18 @@ public class BrandController {
     }
 
     @RequestMapping(value = "/admin/brand/addBrand", method = RequestMethod.POST)
-    public String addBrand(@Valid @ModelAttribute(value = "brandFormObj") Brand brand, BindingResult result) {
+    public String addBrand(@Valid @ModelAttribute(value = "brandFormObj") Brand brand, BindingResult result, HttpServletRequest request) {
         // Binding Result is used if the form that has any error then it will
         // redirect to the same page without performing any functions
         if (result.hasErrors())
             return "addBrand";
         brandService.addBrand(brand);
         MultipartFile logo = brand.getLogo();
+        String root_directory = request.getSession().getServletContext().getRealPath("/");
+        String root_dri ="${pageContext.request.contextPath}";
         if (logo != null && !logo.isEmpty()) {
-            Path path = Paths.get("C:/Users/Ismail/workspace/ShoppingCart/src/main/webapp/WEB-INF/resource/images/products/" + brand.getId() + ".jpg");
+            Path path = Paths.get(root_directory+"\\WEB-INF\\resources\\image\\"+brand.getId()+".png");
+//            Path path = Paths.get("C:/Users/Ismail/workspace/ShoppingCart/src/main/webapp/WEB-INF/resource/images/products/" + brand.getId() + ".jpg");
 
             try {
                 logo.transferTo(new File(path.toString()));
@@ -105,6 +109,7 @@ public class BrandController {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                throw new RuntimeException("La imagen del producto no pudo ser guardada.\n" + e);
             }
         }
         return "redirect:/getAllBrands";

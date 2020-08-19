@@ -425,7 +425,7 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Logo: </label>
 
                                 <div class="col-sm-9">
-                                    <form:input path="logo" type="file" name="upload" id="form-field-2" class="col-xs-10"/>
+                                    <form:input path="logo" type="file" name="logo" id="logo" class="col-xs-10"/>
                                 </div>
                             </div>
                             <div class="space-4"></div>

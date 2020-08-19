@@ -271,7 +271,7 @@
                 <ul class="submenu">
 
                     <li class="">
-                        <a href="profile_supplier.html">
+                        <a href="<c:url value="/getAllBrands" />">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Thông tin nhà sản xuất
                         </a>

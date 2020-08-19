@@ -426,12 +426,13 @@
                                                 </label>
                                             </th>
                                             <th>Id</th>
+                                            <th class="hidden-320" >Logo</th>
                                             <th>Tên nhà sản xuất</th>
 
-                                            <th>
-                                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                                Hiện thị
-                                            </th>
+<%--                                            <th>--%>
+<%--                                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>--%>
+<%--                                                Hiện thị--%>
+<%--                                            </th>--%>
 
 
                                             <th>Tác vụ</th>
@@ -453,18 +454,21 @@
 
 
                                                 <td>${brand.id}</td>
-                                                <td class="hidden-480">${brand.name}</td>
+
+                                                <td class="hidden-320"><img src="<c:url value="/resources/image/brand/logo${brand.id}.jpg"/>"
+                                                        width="15%" alt="${brand.logo}" /></td>
+                                                <td >${brand.name}</td>
                                                 <!--                                            <td>Thành viên</td>-->
 
-                                                <td class="hidden-480">
-                                                    <div class="col-xs-3">
-                                                        <label>
-                                                            <input name="switch-field-1" class="ace ace-switch"
-                                                                   type="checkbox"/>
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
+<%--                                                <td class="hidden-480">--%>
+<%--                                                    <div class="col-xs-3">--%>
+<%--                                                        <label>--%>
+<%--                                                            <input name="switch-field-1" class="ace ace-switch"--%>
+<%--                                                                   type="checkbox"/>--%>
+<%--                                                            <span class="lbl"></span>--%>
+<%--                                                        </label>--%>
+<%--                                                    </div>--%>
+<%--                                                </td>--%>
 
                                                 <td>
                                                     <div class="hidden-sm hidden-xs action-buttons">

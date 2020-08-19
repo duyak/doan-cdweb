@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -57,8 +58,9 @@ public class BrandController {
     }
 
     @RequestMapping("/admin/delete/{brandId}")
-    public String deleteBrand(@PathVariable(value = "brandId") Brand brandId) {
-        Path path = Paths.get("C:/Users/Ismail/workspace/ShoppingCart/src/main/webapp/WEB-INF/resource/images/products/" + brandId + ".jpg");
+    public String deleteBrand(@PathVariable(value = "brandId") Brand brandId,HttpServletRequest request) {
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        Path path = Paths.get(rootDirectory+"/resources/image/brand/logo" +brandId.getId() + ".jpg");
 
         if (Files.exists(path)) {
             try {
@@ -74,12 +76,24 @@ public class BrandController {
     }
 
     @RequestMapping("admin/delete1/{brandId}")
-    public String deleteBrand(@PathVariable(value = "brandId") int brandId) {
+    public String deleteBrand(@PathVariable(value = "brandId") int brandId,HttpServletRequest request) {
+        Brand brand= new Brand();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        Path path = Paths.get(rootDirectory+"/resources/image/brand/logo" + brand.getId() + ".png");
 
+        if (Files.exists(path)) {
+            try {
+                Files.delete(path);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         brandService.deleteBrand(brandId);
         return "redirect:/getAllBrands";
 
     }
+
 
     @RequestMapping(value = "/admin/brand/addBrand", method = RequestMethod.GET)
     public String getBrandForm(Model model) {
@@ -96,24 +110,24 @@ public class BrandController {
             return "addBrand";
         brandService.addBrand(brand);
         MultipartFile logo = brand.getLogo();
-        String root_directory = request.getSession().getServletContext().getRealPath("/");
-        String root_dri ="${pageContext.request.contextPath}";
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         if (logo != null && !logo.isEmpty()) {
-            Path path = Paths.get(root_directory+"\\WEB-INF\\resources\\image\\"+brand.getId()+".png");
-//            Path path = Paths.get("C:/Users/Ismail/workspace/ShoppingCart/src/main/webapp/WEB-INF/resource/images/products/" + brand.getId() + ".jpg");
-
+            Path path = Paths.get(rootDirectory+"/resources/image/brand/logo" + brand.getId() + ".jpg");
+            System.out.println(path.toString());
             try {
                 logo.transferTo(new File(path.toString()));
-
             } catch (IllegalStateException e) {
-
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-                throw new RuntimeException("La imagen del producto no pudo ser guardada.\n" + e);
             }
         }
+
+
         return "redirect:/getAllBrands";
     }
+
+
 
     @RequestMapping(value = "/admin/brand/editBrand/{brandId}")
     public ModelAndView getEditForm(@PathVariable(value = "brandId") Integer brandId) {
@@ -122,7 +136,22 @@ public class BrandController {
     }
 
     @RequestMapping(value = "/admin/brand/editBrand", method = RequestMethod.POST)
-    public String editBrand(@ModelAttribute(value = "editBrandObj") Brand brand) {
+    public String editBrand(@ModelAttribute(value = "editBrandObj") Brand brand,BindingResult result, HttpServletRequest request) {
+        if(result.hasErrors()){
+            return "admin/editBrand";
+        }
+        MultipartFile logo = brand.getLogo();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        Path path = Paths.get(rootDirectory + "/resources/image/brand/logo"+brand.getId()+".jpg");
+        System.out.println(path.toString());
+        if(logo !=null && !logo.isEmpty()){
+            try{
+                logo.transferTo(new File(path.toString()));
+            }catch(Exception ex){
+                ex.printStackTrace();
+                throw new RuntimeException("Product image saving failed", ex);
+            }
+        }
         brandService.editBrand(brand);
         return "redirect:/getAllBrands";
     }

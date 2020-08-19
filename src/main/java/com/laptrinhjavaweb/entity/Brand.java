@@ -6,19 +6,20 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
 public class Brand {
+    @Transient
+    @Column(name = "logo")
+    MultipartFile logo;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Transient
-    @Column(name = "logo")
-    private MultipartFile logo;
     @Column(name = "activeFlag")
     private Integer activeFlag;
     @Temporal(TemporalType.DATE)
@@ -29,7 +30,7 @@ public class Brand {
     private Date updateDate;
     @Column(name = "status")
     private Integer status;
-    @OneToMany(mappedBy = "brandId",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "brandId", fetch = FetchType.LAZY)
     private Collection<ProductLine> productLines;
 
     public Brand() {
@@ -42,7 +43,7 @@ public class Brand {
         activeFlag = activeFlag;
         createDate = createDate;
         updateDate = updateDate;
-        status=status;
+        status = status;
 
     }
 

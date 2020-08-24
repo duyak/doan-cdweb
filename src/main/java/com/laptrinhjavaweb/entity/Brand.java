@@ -37,6 +37,9 @@ public class Brand {
     @OneToMany(mappedBy = "brandId", fetch = FetchType.LAZY)
     private Collection<ProductLine> productLines;
 
+    @OneToMany(mappedBy = "brandId",fetch = FetchType.LAZY)
+    private Collection<Product> products;
+
     public Brand() {
     }
 
@@ -115,4 +118,6 @@ public class Brand {
     public void setProductLines(Collection<ProductLine> productLines) {
         this.productLines = productLines;
     }
+
+
 }

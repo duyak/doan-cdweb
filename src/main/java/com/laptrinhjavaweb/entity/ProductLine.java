@@ -24,6 +24,8 @@ public class ProductLine {
     @Column(name = "createUpdate")
     private Date createUpdate;
 
+
+
     public ProductLine() {
     }
 

@@ -1,63 +1,66 @@
 package com.laptrinhjavaweb.repository.impl;
 
 import com.laptrinhjavaweb.entity.ProductLine;
-import com.laptrinhjavaweb.entity.ProductLineEntity;
 import com.laptrinhjavaweb.repository.ProductLineRepository;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-@Repository("productlineDAO")
+@Repository(value = "productLineDao")
 public class ProductLineRepositoryImpl implements ProductLineRepository {
-
     @Autowired
     private SessionFactory sessionFactory;
 
-
-    @SuppressWarnings("unchecked")
     @Override
-    public List<ProductLineEntity> findByBrand(int brandId) {
-        List<ProductLineEntity> productLineEntities = null;
-        Session session = sessionFactory.openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            productLineEntities = session.createQuery("SELECT pl.id as id,"
-                    + "pl.name as name " + "FROM ProductLine pl "
-                    + "WHERE brandId.id = :brandId")
-                    .setInteger("brandId", brandId)
-                    .setResultTransformer(Transformers.aliasToBean(ProductLineEntity.class)).list();
+    public List<ProductLine> getAllProductLines() {
+        Session session = sessionFactory.getCurrentSession();
+        List<ProductLine> list = session.createQuery("FROM ProductLine").list();
+        return list;
+    }
 
-            transaction.commit();
-
-        } catch (Exception e) {
-            productLineEntities = null;
-            if (transaction != null) {
-                transaction.rollback();
-            }
-
-
-        } finally {
-            session.close();
-
-
-        }
-        return productLineEntities;
+    @Override
+    public ProductLine getProductLineById(Integer productLineId) {
+        Session session = sessionFactory.getCurrentSession();
+        ProductLine productLine = (ProductLine) session.get(ProductLine.class, productLineId);
+        return productLine;
     }
 
     @Override
     public void addProductLine(ProductLine productLine) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.save(productLine);
-        session.close();
 
     }
+
+    @Override
+    public void editProductLine(ProductLine productLine) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(productLine);
+
+    }
+
+    @Override
+    public void deleteProductLine(ProductLine productLine) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(productLine);
+
+
+    }
+
+    /*Lấy danh sách productline tu brand
+     * @Param idBrand
+     *
+     * */
+    @SuppressWarnings("unchecked")
+    public List<ProductLine> getProductLineByBrand(Integer brandId){
+        Session session = sessionFactory.getCurrentSession();
+        List<ProductLine> list = session.createQuery("FROM ProductLine WHERE brandId.id = '" + brandId + "'").list();
+        return list;
+    }
+
+
+
 }

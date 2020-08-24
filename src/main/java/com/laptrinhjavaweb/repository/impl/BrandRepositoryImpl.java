@@ -2,11 +2,11 @@ package com.laptrinhjavaweb.repository.impl;
 
 import com.laptrinhjavaweb.entity.Brand;
 import com.laptrinhjavaweb.repository.BrandRepository;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository(value = "brandDao")
@@ -21,6 +21,30 @@ public class BrandRepositoryImpl implements BrandRepository {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public Brand findByNameBrand(String name) {
+        Session session = null;
+        Transaction ts = null;
+        try {
+            session = sessionFactory.openSession();
+            ts = session.beginTransaction();
+            List<Brand> users = new ArrayList<Brand>();
+            String hql = "FROM brand b WHERE b.name = :name";
+            Query query = session.createQuery(hql);
+            query.setParameter("name", name);
+            users = query.list();
+            if (users.size() > 0) {
+                return users.get(0);
+            }
+
+            session.close();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+
+        }
+        return null;
     }
 
     @Override

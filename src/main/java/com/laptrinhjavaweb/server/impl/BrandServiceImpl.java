@@ -27,6 +27,11 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public Brand findByNameBrand(String name) {
+        return brandRepository.findByNameBrand(name);
+    }
+
+    @Override
     @Transactional
     public List<Brand> getAllBrands() {
         return brandRepository.getAllBrands();
@@ -47,8 +52,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void addBrand(Brand brand) {
-        brand.setCreateDate(new Date());
-        brand.setUpdateDate(new Date());
+
+        brand.setCreateDate(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+        brand.setUpdateDate(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
         brand.setActiveFlag(1);
         brand.setStatus(1);
         brandRepository.addBrandId(brand);
@@ -57,6 +63,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void editBrand(Brand brand) {
+        brand.setUpdateDate(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
         brand.setActiveFlag(1);
         brand.setStatus(1);
 //        brand.setUpdateDate(new Date());

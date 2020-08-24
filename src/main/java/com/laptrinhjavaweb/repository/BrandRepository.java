@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface BrandRepository {
 
+    public Brand findByNameBrand(String name);
+
     List<Brand> getAllBrands();
 
     Brand getBrandById(Integer brandId);

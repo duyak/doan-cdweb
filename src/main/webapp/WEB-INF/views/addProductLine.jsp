@@ -8,14 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="select" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
     <title>Thêm dòng sản phẩm</title>
 
-    <meta name="description" content="overview &amp; stats" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="overview &amp; stats"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
     <%--    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />--%>
@@ -92,7 +93,7 @@
 
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome</small>
 									Jason
@@ -133,12 +134,18 @@
 
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
-        try{ace.settings.loadState('main-container')}catch(e){}
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
     </script>
 
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
-            try{ace.settings.loadState('sidebar')}catch(e){}
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
         </script>
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -230,8 +237,6 @@
                     </li>
 
 
-
-
                 </ul>
             </li>
             <!--Quản lí danh mục-->
@@ -264,7 +269,7 @@
                     <i class="menu-icon fa fa-pencil-square-o"></i>
                     <span class="menu-text">Quản lý nhà sản xuất</span>
 
-                </a>    <b class="arrow fa fa-angle-down"></b>
+                </a> <b class="arrow fa fa-angle-down"></b>
 
                 <b class="arrow"></b>
 
@@ -365,7 +370,8 @@
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
 
@@ -388,7 +394,8 @@
                 <div class="nav-search" id="nav-search">
                     <form class="form-search">
 								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<input type="text" placeholder="Search ..." class="nav-search-input"
+                                           id="nav-search-input" autocomplete="off"/>
 									<i class="ace-icon fa fa-search nav-search-icon"></i>
 								</span>
                     </form>
@@ -411,26 +418,47 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        <form class="form-horizontal" role="form" method="post">
+                        <c:url value="/admin/productLine/addProductLine" var="url"></c:url>
+                        <form:form action="${url}" commandName="productLineFormObj" class="form-horizontal" role="form"
+                                   method="post">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tên nhà sản xuất: </label>
-                                <select name="" id="">
-                                    <c:forEach var="brand" items="${brandss}">
-                                        <option value="${brand.id}">${brand.name}</option>
-                                    </c:forEach>
+                                <label class="col-sm-3 control-label no-padding-right" for="">Tên nhà sản
+                                    xuất: </label>
 
-                                </select>
+<%--                                <form:select path="brandId.id">--%>
+
+
+<%--                                    <form:options items="${productLineFormObj.brandId}" />--%>
+
+<%--                                </form:select>--%>
+<%--                                <form:select path="brandId">--%>
+<%--                                    <form:options items="${productLineFormObj.brandId.id}">${productLineFormObj.brandId.name}</form:options>--%>
+<%--                                </form:select>--%>
+<%--                                <select class="custom-select" id="comboboxCountry">--%>
+<%--                                    <option value="-1">Select a country</option>--%>
+<%--                                    <c:forEach var="brand" items="${productLineFormObj.brandId}">--%>
+<%--                                        <option value="${brand.id}">${brand.name}</option>--%>
+<%--                                    </c:forEach>--%>
+<%--                                </select>--%>
+                                <form:select path="brandId.id" name="" id="">
+                                        <c:forEach var="brand" items="${brands}">
+                                            <option value="${brand.id}">${brand.name}</option>
+                                        </c:forEach>
+                                </form:select>
+
 
                                 <div class="col-sm-9">
 
-                                </div>
+                                    </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Dòng sản phẩm: </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="name">Dòng sản
+                                    phẩm: </label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" placeholder="Vui lòng nhập tên dòng sảm phẩm" class="col-xs-10" />
+                                    <form:input path="name" type="text" id="name"
+                                                placeholder="Vui lòng nhập tên dòng sảm phẩm" class="col-xs-10"/>
                                 </div>
                             </div>
                             <div class="space-4"></div>
@@ -438,7 +466,7 @@
 
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <button class="btn btn-info" type="button">
+                                    <button class="btn btn-info" type="submit">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                         Submit
                                     </button>
@@ -456,7 +484,7 @@
                             <div class="space-24"></div>
 
 
-                        </form>
+                        </form:form>
 
 
                     </div><!-- /.col -->
@@ -507,7 +535,7 @@
 <script src="<c:url value="/resources/assets/js/jquery-1.11.3.min.js" />"></script>
 <![endif]-->
 <script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='<c:url value="/resources/assets/js/jquery.mobile.custom.min.js" />'>"+"<"+"/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='<c:url value="/resources/assets/js/jquery.mobile.custom.min.js" />'>" + "<" + "/script>");
 </script>
 <script src="<c:url value="/resources/assets/js/bootstrap.min.js" />"></script>
 
@@ -530,8 +558,8 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    jQuery(function($) {
-        $('.easy-pie-chart.percentage').each(function(){
+    jQuery(function ($) {
+        $('.easy-pie-chart.percentage').each(function () {
             var $box = $(this).closest('.infobox');
             var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
             var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
@@ -541,21 +569,21 @@
                 trackColor: trackColor,
                 scaleColor: false,
                 lineCap: 'butt',
-                lineWidth: parseInt(size/10),
+                lineWidth: parseInt(size / 10),
                 animate: ace.vars['old_ie'] ? false : 1000,
                 size: size
             });
         })
 
-        $('.sparkline').each(function(){
+        $('.sparkline').each(function () {
             var $box = $(this).closest('.infobox');
             var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
             $(this).sparkline('html',
                 {
-                    tagValuesAttribute:'data-values',
+                    tagValuesAttribute: 'data-values',
                     type: 'bar',
-                    barColor: barColor ,
-                    chartRangeMin:$(this).data('min') || 0
+                    barColor: barColor,
+                    chartRangeMin: $(this).data('min') || 0
                 });
         });
 
@@ -564,20 +592,21 @@
         //but sometimes it brings up errors with normal resize event handlers
         $.resize.throttleWindow = false;
 
-        var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
+        var placeholder = $('#piechart-placeholder').css({'width': '90%', 'min-height': '150px'});
         var data = [
-            { label: "social networks",  data: 38.7, color: "#68BC31"},
-            { label: "search engines",  data: 24.5, color: "#2091CF"},
-            { label: "ad campaigns",  data: 8.2, color: "#AF4E96"},
-            { label: "direct traffic",  data: 18.6, color: "#DA5430"},
-            { label: "other",  data: 10, color: "#FEE074"}
+            {label: "social networks", data: 38.7, color: "#68BC31"},
+            {label: "search engines", data: 24.5, color: "#2091CF"},
+            {label: "ad campaigns", data: 8.2, color: "#AF4E96"},
+            {label: "direct traffic", data: 18.6, color: "#DA5430"},
+            {label: "other", data: 10, color: "#FEE074"}
         ]
+
         function drawPieChart(placeholder, data, position) {
             $.plot(placeholder, data, {
                 series: {
                     pie: {
                         show: true,
-                        tilt:0.8,
+                        tilt: 0.8,
                         highlight: {
                             opacity: 0.25
                         },
@@ -592,7 +621,7 @@
                     show: true,
                     position: position || "ne",
                     labelBoxBorderColor: null,
-                    margin:[-30,15]
+                    margin: [-30, 15]
                 }
                 ,
                 grid: {
@@ -601,6 +630,7 @@
                 }
             })
         }
+
         drawPieChart(placeholder, data);
 
         /**
@@ -616,13 +646,13 @@
         var previousPoint = null;
 
         placeholder.on('plothover', function (event, pos, item) {
-            if(item) {
+            if (item) {
                 if (previousPoint != item.seriesIndex) {
                     previousPoint = item.seriesIndex;
-                    var tip = item.series['label'] + " : " + item.series['percent']+'%';
+                    var tip = item.series['label'] + " : " + item.series['percent'] + '%';
                     $tooltip.show().children(0).text(tip);
                 }
-                $tooltip.css({top:pos.pageY + 10, left:pos.pageX + 10});
+                $tooltip.css({top: pos.pageY + 10, left: pos.pageX + 10});
             } else {
                 $tooltip.hide();
                 previousPoint = null;
@@ -631,11 +661,9 @@
         });
 
         /////////////////////////////////////
-        $(document).one('ajaxloadstart.page', function(e) {
+        $(document).one('ajaxloadstart.page', function (e) {
             $tooltip.remove();
         });
-
-
 
 
         var d1 = [];
@@ -654,17 +682,17 @@
         }
 
 
-        var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
+        var sales_charts = $('#sales-charts').css({'width': '100%', 'height': '220px'});
         $.plot("#sales-charts", [
-            { label: "Domains", data: d1 },
-            { label: "Hosting", data: d2 },
-            { label: "Services", data: d3 }
+            {label: "Domains", data: d1},
+            {label: "Hosting", data: d2},
+            {label: "Services", data: d3}
         ], {
             hoverable: true,
             shadowSize: 0,
             series: {
-                lines: { show: true },
-                points: { show: true }
+                lines: {show: true},
+                points: {show: true}
             },
             xaxis: {
                 tickLength: 0
@@ -676,14 +704,15 @@
                 tickDecimals: 3
             },
             grid: {
-                backgroundColor: { colors: [ "#fff", "#fff" ] },
+                backgroundColor: {colors: ["#fff", "#fff"]},
                 borderWidth: 1,
-                borderColor:'#555'
+                borderColor: '#555'
             }
         });
 
 
         $('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+
         function tooltip_placement(context, source) {
             var $source = $(source);
             var $parent = $source.closest('.tab-content')
@@ -693,7 +722,7 @@
             var off2 = $source.offset();
             //var w2 = $source.width();
 
-            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+            if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
             return 'left';
         }
 
@@ -706,37 +735,37 @@
         //Android's default browser somehow is confused when tapping on label which will lead to dragging the task
         //so disable dragging when clicking on label
         var agent = navigator.userAgent.toLowerCase();
-        if(ace.vars['touch'] && ace.vars['android']) {
-            $('#tasks').on('touchstart', function(e){
+        if (ace.vars['touch'] && ace.vars['android']) {
+            $('#tasks').on('touchstart', function (e) {
                 var li = $(e.target).closest('#tasks li');
-                if(li.length == 0)return;
+                if (li.length == 0) return;
                 var label = li.find('label.inline').get(0);
-                if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
+                if (label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation();
             });
         }
 
         $('#tasks').sortable({
-                opacity:0.8,
-                revert:true,
-                forceHelperSize:true,
+                opacity: 0.8,
+                revert: true,
+                forceHelperSize: true,
                 placeholder: 'draggable-placeholder',
-                forcePlaceholderSize:true,
-                tolerance:'pointer',
-                stop: function( event, ui ) {
+                forcePlaceholderSize: true,
+                tolerance: 'pointer',
+                stop: function (event, ui) {
                     //just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
                     $(ui.item).css('z-index', 'auto');
                 }
             }
         );
         $('#tasks').disableSelection();
-        $('#tasks input:checkbox').removeAttr('checked').on('click', function(){
-            if(this.checked) $(this).closest('li').addClass('selected');
+        $('#tasks input:checkbox').removeAttr('checked').on('click', function () {
+            if (this.checked) $(this).closest('li').addClass('selected');
             else $(this).closest('li').removeClass('selected');
         });
 
 
         //show the dropdowns on top or bottom depending on window height and menu position
-        $('#task-tab .dropdown-hover').on('mouseenter', function(e) {
+        $('#task-tab .dropdown-hover').on('mouseenter', function (e) {
             var offset = $(this).offset();
 
             var $w = $(window)

@@ -1,15 +1,22 @@
 package com.laptrinhjavaweb.server;
 
 import com.laptrinhjavaweb.entity.ProductLine;
-import com.laptrinhjavaweb.entity.ProductLineEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface ProductLineServer {
+    List<ProductLine> getAllProductLines();
 
-    public List<ProductLineEntity> findByBrand(int brandId);
+    ProductLine getProductLineById(Integer productLineId);
 
+    void addProductLine(ProductLine productLine);
 
-    public void addProductLine(ProductLine productLine);
+    void editProductLine(ProductLine productLine);
+
+    void deleteProductLine(ProductLine productLine);
+
+    List<ProductLine> getProductLineByBrand(Integer brandId);
 
 }

@@ -1,9 +1,11 @@
 package com.laptrinhjavaweb.entity;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -19,14 +21,16 @@ public class Brand {
     @Column(name = "id")
     private Integer id;
     @Column(name = "name")
+    @Size(min = 2, max = 30, message = "username phải ít nhất 2 kí tự")
+    @NotEmpty(message = "Không được để trống username !")
     private String name;
     @Column(name = "activeFlag")
     private Integer activeFlag;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createDate")
     private Date createDate;
     @Column(name = "updateDate")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
     @Column(name = "status")
     private Integer status;

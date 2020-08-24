@@ -14,22 +14,23 @@ public class ProductLine {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brandId")
     private Brand brandId;
 
     @Column(name = "createDate")
     private Date createDate;
 
-    @Column(name="createUpdate")
+    @Column(name = "createUpdate")
     private Date createUpdate;
 
     public ProductLine() {
     }
-    public ProductLine(Integer id, String name, Brand brandId){
-        id=id;
-        name=name;
-        brandId=brandId;
+
+    public ProductLine(Integer id, String name, Brand brandId) {
+        id = id;
+        name = name;
+        brandId = brandId;
     }
 
     public Integer getId() {
@@ -72,3 +73,4 @@ public class ProductLine {
         this.createUpdate = createUpdate;
     }
 }
+

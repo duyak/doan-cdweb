@@ -155,7 +155,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="active">
+            <li class="">
                 <a href="index.html">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> Trang Chủ </span>
@@ -252,7 +252,7 @@
                 <b class="arrow"></b>
                 <ul class="submenu">
                     <li class="active">
-                        <a href="profile_users.html">
+                        <a href="/getAllBrands">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Danh sách nhà sản xuất
                         </a>

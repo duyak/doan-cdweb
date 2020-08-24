@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
-    @RequestMapping("/jquerytable")
+    @RequestMapping("/listProduct")
     public String index(){
-        return "jquerytable";
+        return "";
     }
 
 

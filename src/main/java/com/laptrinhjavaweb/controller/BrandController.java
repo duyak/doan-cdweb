@@ -14,6 +14,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -166,6 +167,15 @@ public class BrandController {
     public String getBrands() {
         return "brandListAngular";
     }
+    @RequestMapping(value = "/checkNameBrand", method = RequestMethod.POST)
+    @ResponseBody
+    public String checkUsername( @RequestParam("name") String name, HttpServletRequest request, HttpServletResponse response)  {
+        String result = "";
+        if(brandService.findByNameBrand(name) != null)
+            result = "exist";
+        return result;
+    }
+
 
 
 }

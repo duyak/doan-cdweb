@@ -33,7 +33,10 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "discount", nullable = false)
+    @Column(name = "discount")
+    private Double discount;
+
+    @Column(name = "description")
     private String description;
 
     @Column(name = "unitBrief")
@@ -53,9 +56,11 @@ public class Product {
     @Column(name = "activeFlag")
     private int activeFlag;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createDate")
     private Date createDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updateDate")
     private Date updateDate;
 
@@ -182,5 +187,11 @@ public class Product {
         this.updateDate = updateDate;
     }
 
+    public Double getDiscount() {
+        return discount;
+    }
 
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
 }

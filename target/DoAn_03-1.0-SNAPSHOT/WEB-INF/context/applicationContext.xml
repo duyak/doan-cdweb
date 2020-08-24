@@ -51,9 +51,10 @@
     <context:component-scan base-package="com.laptrinhjavaweb"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/image/**" location="/image/" />
 
 
 
-<!--        <mvc:resources mapping="/resources/**" location="/resources/image/"
-                       cache-period="31556926"/>-->
+    <!--        <mvc:resources mapping="/resources/**" location="/resources/image/"
+                           cache-period="31556926"/>-->
 </beans>

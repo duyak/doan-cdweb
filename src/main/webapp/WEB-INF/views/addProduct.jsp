@@ -536,7 +536,7 @@
                                 <label class="col-sm-3 control-label no-padding-right">Danh sách ảnh:</label>
 
                                 <div class="col-sm-9">
-                                    <form:input path="imgMain" name="imgMain" multiple="multiple" type="file" id="form-field-" placeholder="Vui lòng nhập lại mật khẩu"
+                                    <form:input path="imgList" name="imgMain" multiple="multiple" type="file" id="form-field-" placeholder="Vui lòng nhập lại mật khẩu"
                                            class="col-xs-10"/>
 
                                 </div>

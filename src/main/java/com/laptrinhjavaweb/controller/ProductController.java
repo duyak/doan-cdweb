@@ -70,32 +70,32 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/admin/product/addProduct", method = RequestMethod.POST)
-    public String addProduct(@Valid @ModelAttribute(value = "productFormObj") Product product, BindingResult result, HttpServletRequest request) {
+    public String addProduct(@Valid @ModelAttribute(value = "productFormObj") Product product, BindingResult result, HttpServletRequest servletRequest) {
 
         if (result.hasErrors())
             return "addProduct";
         productServer.addProduct(product);
-        MultipartFile imgMain = product.getImgMain();
+        //Get the uploaded files and store them
         List<MultipartFile> imgList = product.getImgList();
         List<String> fileNames = new ArrayList<String>();
-        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-
-        if (imgList != null && imgList.isEmpty()) {
+        if (null != imgList && imgList.size() > 0)
+        {
             for (MultipartFile multipartFile : imgList) {
+
                 String fileName = multipartFile.getOriginalFilename();
                 fileNames.add(fileName);
-                File imageFile = new File(request.getServletContext().getRealPath("/image"), fileName);
 
-                try {
+                File imageFile = new File(servletRequest.getServletContext().getRealPath("/image"), fileName);
+                try
+                {
                     multipartFile.transferTo(imageFile);
-
-                } catch (IOException e) {
+                } catch (IOException e)
+                {
                     e.printStackTrace();
                 }
-
-
             }
         }
+
         return "redirect:/getAllProduct";
     }
 }

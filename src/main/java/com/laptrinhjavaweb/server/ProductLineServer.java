@@ -19,4 +19,6 @@ public interface ProductLineServer {
 
     List<ProductLine> getProductLineByBrand(Integer brandId);
 
+
+
 }

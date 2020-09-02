@@ -58,23 +58,23 @@ public class BrandController {
 
     }
 
-    @RequestMapping("/admin/delete/{brandId}")
-    public String deleteBrand(@PathVariable(value = "brandId") Brand brandId,HttpServletRequest request) {
-        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-        Path path = Paths.get(rootDirectory+"/resources/image/brand/logo" +brandId.getId() + ".jpg");
-
-        if (Files.exists(path)) {
-            try {
-                Files.delete(path);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        brandService.deleteBrand(brandId);
-        return "redirect:/getAllBrands";
-
-    }
+//    @RequestMapping("/admin/delete/{brandId}")
+//    public String deleteBrand(@PathVariable(value = "brandId") Brand brandId,HttpServletRequest request) {
+//        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+//        Path path = Paths.get(rootDirectory+"/resources/image/brand/logo" +brandId.getId() + ".jpg");
+//
+//        if (Files.exists(path)) {
+//            try {
+//                Files.delete(path);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        brandService.deleteBrand(brandId);
+//        return "redirect:/getAllBrands";
+//
+//    }
 
     @RequestMapping("admin/delete1/{brandId}")
     public String deleteBrand(@PathVariable(value = "brandId") int brandId,HttpServletRequest request) {

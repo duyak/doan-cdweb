@@ -1,5 +1,6 @@
 package com.laptrinhjavaweb.controller;
 
+import com.google.gson.Gson;
 import com.laptrinhjavaweb.entity.Brand;
 import com.laptrinhjavaweb.entity.ProductLine;
 import com.laptrinhjavaweb.server.BrandService;
@@ -10,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
@@ -27,17 +26,15 @@ public class ProductLineController {
 
     @Autowired
     ProductLineServer productLineServer;
-
+    @Autowired
+    ServletContext application;
     @Autowired
     private BrandService brandService;
 
-    @Autowired
-    ServletContext application;
-
     @RequestMapping("/getAllProductLine")
-    public ModelAndView getAllProductLine(){
+    public ModelAndView getAllProductLine() {
         List<ProductLine> productLines = productLineServer.getAllProductLines();
-        return new ModelAndView("listProductLine","productLines",productLines);
+        return new ModelAndView("listProductLine", "productLines", productLines);
     }
 
     //form them product
@@ -45,15 +42,18 @@ public class ProductLineController {
     public String fromAdd(Model model) {
         ProductLine productLine = new ProductLine();
         List<Brand> brands = brandService.getAllBrands();
-        model.addAttribute("productLineFormObj",productLine);
-        model.addAttribute("brands",brands);
+        model.addAttribute("productLineFormObj", productLine);
+        model.addAttribute("brands", brands);
         return "addProductLine";
     }
-    @RequestMapping(value = "/admin/productLine/addProductLine",method = RequestMethod.POST)
-    public String addProductLine(@Valid @ModelAttribute(value = "productLineFormObj") ProductLine productLine, BindingResult result, HttpServletRequest request){
-        if(result.hasErrors())
-            return  "addProductLine";
+
+    @RequestMapping(value = "/admin/productLine/addProductLine", method = RequestMethod.POST)
+    public String addProductLine(@Valid @ModelAttribute(value = "productLineFormObj") ProductLine productLine, BindingResult result, HttpServletRequest request) {
+        if (result.hasErrors())
+            return "addProductLine";
         productLineServer.addProductLine(productLine);
         return "redirect:/getAllProductLine";
     }
+
+
 }

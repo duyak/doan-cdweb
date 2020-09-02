@@ -557,7 +557,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#dynamic-table').DataTable();
-    } );
+    0} );
 
 </script>
 </body>

@@ -3,8 +3,10 @@ package com.laptrinhjavaweb.controller;
 import com.laptrinhjavaweb.entity.Brand;
 import com.laptrinhjavaweb.entity.Category;
 import com.laptrinhjavaweb.entity.Product;
+import com.laptrinhjavaweb.entity.ProductLine;
 import com.laptrinhjavaweb.server.BrandService;
 import com.laptrinhjavaweb.server.CategoryServer;
+import com.laptrinhjavaweb.server.ProductLineServer;
 import com.laptrinhjavaweb.server.ProductServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,6 +46,9 @@ public class ProductController {
     @Autowired
     ProductServer productServer;
 
+    @Autowired
+    ProductLineServer productLineServer;
+
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
@@ -63,8 +68,10 @@ public class ProductController {
         Product product = new Product();
         List<Brand> brands = brandService.getAllBrands();
         List<Category> categories = categoryServer.getAllCategory();
+        List<ProductLine> productLines = productLineServer.getAllProductLines();
         model.addAttribute("productFormObj", product);
         model.addAttribute("brands", brands);
+        model.addAttribute("productLines",productLines);
         model.addAttribute("categories", categories);
         return "addProduct";
     }

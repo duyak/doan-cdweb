@@ -1,6 +1,5 @@
 package com.laptrinhjavaweb.server.impl;
 
-import com.laptrinhjavaweb.entity.Brand;
 import com.laptrinhjavaweb.entity.ProductLine;
 import com.laptrinhjavaweb.repository.ProductLineRepository;
 import com.laptrinhjavaweb.server.ProductLineServer;
@@ -51,4 +50,6 @@ public class ProductLineServerImpl implements ProductLineServer {
     public List<ProductLine> getProductLineByBrand(Integer brandId) {
         return productLineRepository.getProductLineByBrand(brandId);
     }
+
+
 }

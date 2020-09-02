@@ -4,6 +4,8 @@ import com.laptrinhjavaweb.entity.ProductLine;
 import com.laptrinhjavaweb.repository.ProductLineRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,7 +57,7 @@ public class ProductLineRepositoryImpl implements ProductLineRepository {
      *
      * */
     @SuppressWarnings("unchecked")
-    public List<ProductLine> getProductLineByBrand(Integer brandId){
+    public List<ProductLine> getProductLineByBrand(Integer brandId) {
         Session session = sessionFactory.getCurrentSession();
         List<ProductLine> list = session.createQuery("FROM ProductLine WHERE brandId.id = '" + brandId + "'").list();
         return list;
